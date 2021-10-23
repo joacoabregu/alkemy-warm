@@ -8,7 +8,10 @@ interface Props extends Omit<RouteProps, "component"> {
   component: React.ElementType;
 }
 
-export default function ProtectedRoute({ component: Component }: Props) {
+export default function ProtectedRoute({
+  component: Component,
+  ...restOfProps
+}: Props) {
   const isAuthenticated = localStorage.getItem("loggedUser");
 
   let loggedUser = useSelector((state: RootState) => state.user.user);
@@ -26,6 +29,7 @@ export default function ProtectedRoute({ component: Component }: Props) {
 
   return (
     <Route
+      {...restOfProps}
       render={(props) =>
         isAuthenticated ? <Component {...props} /> : <Redirect to="/login" />
       }
