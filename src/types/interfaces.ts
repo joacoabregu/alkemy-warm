@@ -14,3 +14,8 @@ export interface PostCreated {
   body: string;
   id: number;
 }
+
+export interface PostPreviewProps {
+  post: Post;
+  key: number;
+}
