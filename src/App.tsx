@@ -6,6 +6,8 @@ import Home from "./pages/Home";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Post from "./pages/Post";
 import EditPost from "./pages/EditPost";
+import CreatePost from "./pages/CreatePost";
+
 
 function App() {
   return (
@@ -17,6 +19,7 @@ function App() {
         </Route>
         <ProtectedRoute path="/detalle/edit/:id" component={EditPost} />
         <ProtectedRoute path="/detalle/:id" component={Post} />
+        <ProtectedRoute path="/create" component={CreatePost} />
         <ProtectedRoute exact path="/" component={Home} />
       </Switch>
     </Router>
