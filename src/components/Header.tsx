@@ -29,11 +29,18 @@ export default function Header() {
           </LinkContainer>
         </Nav.Item>
         {!loggedUser && (
-          <Nav.Item as="li">
-            <LinkContainer to="/login">
-              <Nav.Link eventKey="link-1">Login</Nav.Link>
-            </LinkContainer>
-          </Nav.Item>
+          <>
+            <Nav.Item as="li">
+              <LinkContainer to="/login">
+                <Nav.Link eventKey="link-1">Login</Nav.Link>
+              </LinkContainer>
+            </Nav.Item>
+            <Nav.Item as="li">
+              <LinkContainer to="/create">
+                <Nav.Link eventKey="link-1">Crear Post</Nav.Link>
+              </LinkContainer>
+            </Nav.Item>
+          </>
         )}
       </div>
       {loggedUser && (
