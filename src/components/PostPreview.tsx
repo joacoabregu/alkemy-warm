@@ -3,6 +3,7 @@ import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import axios from "axios";
 import { PostPreviewProps } from "../types/interfaces";
+import Col from "react-bootstrap/Col";
 
 export default function PostPreview({ post, key }: PostPreviewProps) {
   let [postDeleted, setPostDeleted] = useState(false);
@@ -23,20 +24,27 @@ export default function PostPreview({ post, key }: PostPreviewProps) {
   }
 
   return (
-    <Card style={{ width: "18rem" }} key={key}>
-      <Card.Body>
-        <Card.Title> {post.title} </Card.Title>
-
-        <Card.Link href={url}>Ver más</Card.Link>
-        <Card.Link href={editUrl}>Editar</Card.Link>
-        {postDeleted ? (
-          <Card.Text> El post se ha eliminado </Card.Text>
-        ) : (
-          <Button variant="primary" onClick={deletePost}>
-            Eliminar
-          </Button>
-        )}
-      </Card.Body>
-    </Card>
+    <Col xs={12} md={6} xl={4} xxl={3} className="d-flex align-items-stretch">
+      <Card style={{ width: "18rem" }} key={key} className="text-center mb-4 ">
+        <Card.Body className="d-flex flex-column justify-content-between">
+          <Card.Title className="mb-4 "> {post.title} </Card.Title>
+          <div>
+            <Card.Link className="btn btn-primary" href={url}>
+              Ver más
+            </Card.Link>
+            <Card.Link className="btn btn-secondary m-1" href={editUrl}>
+              Editar
+            </Card.Link>
+            {postDeleted ? (
+              <Card.Text> El post se ha eliminado </Card.Text>
+            ) : (
+              <Button variant="danger" onClick={deletePost}>
+                Eliminar
+              </Button>
+            )}
+          </div>
+        </Card.Body>
+      </Card>
+    </Col>
   );
 }

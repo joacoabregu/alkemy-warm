@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
 import axios from "axios";
 import { Post } from "../types/interfaces";
 import PostPreview from "../components/PostPreview";
@@ -33,16 +32,12 @@ export default function Home() {
   }
 
   return (
-    <>
-      <Container>
-        <Row>
-          <Col>
-            {posts.map((post, index) => {
-              return <PostPreview post={post} key={index} />;
-            })}
-          </Col>
-        </Row>
-      </Container>
-    </>
+    <Container>
+      <Row className="bg-light p-5 mt-5 mb-3 position-relative justify-content-center">
+        {posts.map((post, index) => {
+          return <PostPreview post={post} key={index} />;
+        })}
+      </Row>
+    </Container>
   );
 }

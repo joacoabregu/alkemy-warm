@@ -7,6 +7,9 @@ import { Alert } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import { Post } from "../types/interfaces";
 import Spinner from "../components/Spinner";
+import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
 
 const validate = (values: { title?: string; body?: string }) => {
   const errors: { title?: string; body?: string } = {};
@@ -80,52 +83,60 @@ export default function EditPost() {
   }
 
   return (
-    <>
-      <Form onSubmit={formik.handleSubmit} className="mb-3">
-        <Form.Group className="mb-3" controlId="title">
-          <Form.Label>Titulo</Form.Label>
-          <Form.Control
-            name="title"
-            type="text"
-            placeholder="Titulo"
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            value={formik.values.title}
-          />
+    <Container fluid="sm">
+      <Row className="justify-content-center">
+        <Col md={3}>
+          <Form onSubmit={formik.handleSubmit} className="mb-3">
+            <Form.Group className="mb-3" controlId="title">
+              <Form.Label>Titulo</Form.Label>
+              <Form.Control
+                name="title"
+                type="text"
+                placeholder="Titulo"
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                value={formik.values.title}
+              />
 
-          {formik.touched.title && formik.errors.title ? (
-            <Form.Text>{formik.errors.title}</Form.Text>
-          ) : null}
-        </Form.Group>
+              {formik.touched.title && formik.errors.title ? (
+                <Form.Text>{formik.errors.title}</Form.Text>
+              ) : null}
+            </Form.Group>
 
-        <Form.Group className="mb-3" controlId="body">
-          <label htmlFor="body">Contenido del Post</label>
+            <Form.Group className="mb-3" controlId="body">
+              <label className="form-label" htmlFor="body">
+                Contenido del Post
+              </label>
+              <textarea
+                className="form-control"
+                id="body"
+                {...formik.getFieldProps("body")}
+              />
+              {formik.touched.body && formik.errors.body ? (
+                <Form.Text>{formik.errors.body}</Form.Text>
+              ) : null}
+            </Form.Group>
+            <Button variant="primary" type="submit">
+              Enviar
+            </Button>
+          </Form>
 
-          <textarea id="body" {...formik.getFieldProps("body")} />
+          {postUpdated && (
+            <Alert data-testid="alerta" variant="warning">
+              Su post se ha creado con exito. Titulo: {postUpdated.title}
+              Contenido: {postUpdated.body}
+            </Alert>
+          )}
 
-          {formik.touched.body && formik.errors.body ? (
-            <Form.Text>{formik.errors.body}</Form.Text>
-          ) : null}
-        </Form.Group>
-        <Button variant="primary" type="submit">
-          Enviar
-        </Button>
-      </Form>
+          {loading && <Spinner />}
 
-      {postUpdated && (
-        <Alert data-testid="alerta" variant="warning">
-          Su post se ha creado con exito. Titulo: {postUpdated.title}
-          Contenido: {postUpdated.body}
-        </Alert>
-      )}
-
-      {loading && <Spinner />}
-
-      {errorSubmitting && (
-        <Alert data-testid="alerta" variant="warning">
-          Se ha producido un error al actulizar los datos de su post
-        </Alert>
-      )}
-    </>
+          {errorSubmitting && (
+            <Alert data-testid="alerta" variant="warning">
+              Se ha producido un error al actulizar los datos de su post
+            </Alert>
+          )}
+        </Col>
+      </Row>
+    </Container>
   );
 }

@@ -8,7 +8,7 @@ export default function Login() {
   return (
     <Container fluid="sm">
       <Row className="justify-content-center">
-        <Col xs={3}>
+        <Col md={3}>
           <Form />
         </Col>
       </Row>
