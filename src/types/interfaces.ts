@@ -9,4 +9,8 @@ export interface PostProps {
   post: Post
 }
 
-
+export interface PostCreated {
+  title: string;
+  body: string;
+  id: number;
+}
