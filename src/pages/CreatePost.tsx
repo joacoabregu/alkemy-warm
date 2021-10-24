@@ -1,18 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import axios from "axios";
-import { Field, useFormik } from "formik";
+import { useFormik } from "formik";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import { Alert } from "react-bootstrap";
-import { useParams } from "react-router-dom";
-import { Post } from "../types/interfaces";
 import Spinner from "../components/Spinner";
+import {PostCreated} from "../types/interfaces";
 
-interface PostCreated {
-  title: string;
-  body: string;
-  id: number;
-}
 
 const validate = (values: { title?: string; body?: string }) => {
   const errors: { title?: string; body?: string } = {};
